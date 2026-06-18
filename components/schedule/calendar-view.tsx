@@ -100,7 +100,6 @@ const CalendarView = () => {
         </div>
       </div>
 
-
       <EditPostDialog
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
@@ -115,7 +114,7 @@ const CalendarView = () => {
             profile_image: selectedPostForEdit.user_channels.profile_image,
             handle: selectedPostForEdit.user_channels.handle
           } : null,
-          // status: selectedPostForEdit.status
+
         } : null}
       />
 

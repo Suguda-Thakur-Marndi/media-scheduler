@@ -36,7 +36,7 @@ export function InstagramPreview({ text, images }: InstagramPreviewProps) {
   return (
     <Card className="overflow-hidden border-none shadow-none">
       <CardContent className="p-0">
-        {/* Header */}
+        { }
         <div className="flex items-center justify-between p-3 pt-0">
           <div className="flex items-center gap-2">
             <Avatar className="size-8">
@@ -48,7 +48,7 @@ export function InstagramPreview({ text, images }: InstagramPreviewProps) {
           <MoreHorizontal className="size-5 text-muted-foreground" />
         </div>
 
-        {/* Image Display - Using Shadcn Carousel */}
+        { }
         <div className="relative aspect-square bg-muted overflow-hidden">
           {images && images.length > 0 ? (
             <Carousel setApi={setApi} className="w-full h-full">
@@ -79,7 +79,7 @@ export function InstagramPreview({ text, images }: InstagramPreviewProps) {
           )}
         </div>
 
-        {/* Actions */}
+        { }
         <div className="p-3">
           <div className="relative flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
@@ -89,7 +89,7 @@ export function InstagramPreview({ text, images }: InstagramPreviewProps) {
               <Send className="size-4" />
             </div>
 
-            {/* Pagination dots - Centered absolute */}
+            { }
             {images && images.length > 1 && (
               <div className="absolute left-1/2 -translate-x-1/2 flex gap-1">
                 {images.map((_, i) => (
@@ -104,7 +104,7 @@ export function InstagramPreview({ text, images }: InstagramPreviewProps) {
             <Bookmark className="size-4.5" />
           </div>
 
-          {/* Caption */}
+          { }
           <div className="text-sm">
             <span className="font-semibold mr-2">Lemon</span>
             {!text ? (

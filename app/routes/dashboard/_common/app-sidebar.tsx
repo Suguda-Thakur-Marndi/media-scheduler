@@ -64,7 +64,7 @@ const AppSidebar = () => {
       return data
     }
   })
-  
+
   const channels = (channelsData?.channels || []) as ChannelType[]
   const unconnectedChannels = channels.filter((channel: ChannelType) => !channel.connected);
   const connectedChannels = channels.filter((channel: ChannelType) => channel.connected);
@@ -73,12 +73,10 @@ const AppSidebar = () => {
   const totalChannels = channelsData?.totalChannels || 0;
   const limitedChannels = unconnectedChannels.slice(0, 4);
 
-
   const handleConnect = (channelTypeId: string) => {
     if(connectMutation.isPending) return;
     connectMutation.mutate(channelTypeId);
   }
- 
 
   return (
     <>
@@ -116,7 +114,6 @@ const AppSidebar = () => {
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
-
 
          {connectedChannels.length > 0 && (
          <SidebarGroup className={cn(isCollapsed && "px-1")}>
@@ -160,8 +157,7 @@ const AppSidebar = () => {
          </SidebarGroup>
          )}
 
-
-        {/* {unconnected channels} */}
+        { }
          <SidebarGroup className={cn(isCollapsed && "px-1")}>
           <SidebarGroupLabel className='text-sm'>Connect Channels</SidebarGroupLabel>
           <SidebarGroupContent>

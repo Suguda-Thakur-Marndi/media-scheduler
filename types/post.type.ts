@@ -5,7 +5,6 @@ export type ImageObject = {
   key: string;
 }
 
-
 export type PostType = {
     id: string
     content: string
@@ -29,7 +28,6 @@ export type PostType = {
     created_at: string;
     updated_at: string;
 }
-
 
 export type CalendarPostType = {
   id: string

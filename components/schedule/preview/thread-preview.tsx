@@ -31,12 +31,12 @@ export function ThreadPreview({ text, images, profileImage, handle }: ThreadPrev
             <p className="mt-1 text-sm leading-normal whitespace-pre-wrap break-words">
               {text || <span className="text-muted-foreground italic">Nothing yet…</span>}
             </p>
-            
-            {/* Images display - Horizontal Scroll based on screenshot */}
+
+            { }
             {images && images.length > 0 && (
               <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar pb-1">
                 {images.map((image, index) => (
-                  <div key={index} className="relative shrink-0 w-[85%] 
+                  <div key={index} className="relative shrink-0 w-[85%]
                   aspect-3/3 max-w-[300px]">
                     <img
                       src={image}

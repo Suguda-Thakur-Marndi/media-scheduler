@@ -2,9 +2,6 @@ import { getInsforgeServerClient } from "@/lib/insforge-server";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
-
-
-
 export async function POST(request: NextRequest) {
     try {
         const { has, userId } = await auth();
@@ -28,7 +25,7 @@ export async function POST(request: NextRequest) {
             messages: [
                 {
                     role: "system",
-                    content: `You are a social media content ideation assistant. 
+                    content: `You are a social media content ideation assistant.
 Return only valid JSON.
 The response must be an object with an "ideas" array.
 Each item must have: "title" and "description".

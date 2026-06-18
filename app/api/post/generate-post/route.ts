@@ -2,7 +2,6 @@ import { getInsforgeServerClient } from "@/lib/insforge-server";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
-
 const ACTIONS = ["generate", "rephrase", "shorten", "expand"] as const;
 type ActionType = (typeof ACTIONS)[number];
 
@@ -17,7 +16,7 @@ export async function POST(request:NextRequest){
         if (!canUseAI) {
             return NextResponse.json({ error: "AI Post generation requires Pro or Premium plan" }, { status: 403 });
         }
-        
+
         const {
             action,
             content="",
@@ -43,7 +42,7 @@ export async function POST(request:NextRequest){
                 .select("type, character_limit")
                 .eq("id", channelId)
                 .single();
-            
+
             if(channelError){
                 return NextResponse.json({ error: "Invalid channel ID" }, { status: 400 });
             }

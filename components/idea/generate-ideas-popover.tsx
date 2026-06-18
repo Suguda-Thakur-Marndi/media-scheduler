@@ -30,7 +30,7 @@ export function GenerateIdeasPopover({ onGenerated }: GenerateIdeasPopoverProps)
   const [generatedIdeas, setGeneratedIdeas] = useState<{
     title: string; description: string
   }[]>([])
-  
+
   const [selectedIdea, setSelectedIdea] = useState(0)
    const { data: subscription, isLoading } = useSubscription()
 
@@ -38,7 +38,6 @@ export function GenerateIdeasPopover({ onGenerated }: GenerateIdeasPopoverProps)
     const planSlug = item.plan.slug
     return planSlug === "pro" || planSlug === "business"
    })
-  
 
   const generateMutation = useMutation({
     mutationFn: async ({ businessType, targetAudience }: {
@@ -79,7 +78,7 @@ export function GenerateIdeasPopover({ onGenerated }: GenerateIdeasPopoverProps)
     const idea = generatedIdeas[selectedIdea]
     if (!idea) return
     onGenerated(idea.title, idea.description)
-    // Reset state
+
     setOpen(false)
     setStep(1)
     setGeneratedIdeas([])
@@ -91,7 +90,7 @@ export function GenerateIdeasPopover({ onGenerated }: GenerateIdeasPopoverProps)
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="gap-2 
+        <Button variant="outline" className="gap-2
         bg-linear-to-r from-[#b0ec9c33] to-[#d1bdff33]">
           <Sparkles className="h-4 w-4" />
           Generate Ideas

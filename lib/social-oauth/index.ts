@@ -18,8 +18,6 @@ function getConfig(type:ChannelTypeEnum) {
     }
 }
 
-
-
 async function requestToken(
     type:ChannelTypeEnum,
     body: URLSearchParams,
@@ -49,13 +47,12 @@ const headers: Record<string, string> = {
   return data
 }
 
-
 function createProvider(type:ChannelTypeEnum,opts: { pkce?: boolean} = {}): OAuthProvider {
    return {
     type,
     getAuthorizationUrl: ({state, redirectUri, codeChallenge, codeChallengeMethod}) => {
        const config = getConfig(type)
-       // Build authorization URL with query parameters
+
        const params = new URLSearchParams({
          client_id: config.clientId,
          redirect_uri: redirectUri,
@@ -94,7 +91,7 @@ function createProvider(type:ChannelTypeEnum,opts: { pkce?: boolean} = {}): OAut
         refreshToken: data.refresh_token ?? null,
         expiresAt,
        }
-      
+
     },
     refreshToken: async ({ refreshToken, redirectUri }) => {
       const config = getConfig(type);
@@ -112,10 +109,10 @@ function createProvider(type:ChannelTypeEnum,opts: { pkce?: boolean} = {}): OAut
       }
 
       const data = await requestToken(type, params)
-      
+
       const seconds = Number(data.expires_in)
       const expiresAt = seconds > 0 ? new Date(Date.now() + seconds * 1000).toISOString(): null
-      
+
       return {
        accessToken: data.access_token,
        refreshToken: data.refresh_token ?? null,
@@ -137,13 +134,13 @@ function createProvider(type:ChannelTypeEnum,opts: { pkce?: boolean} = {}): OAut
 
       const profileData = data?.data ?? data?.user ?? data
       const providerAccountId = profileData?.id ?? profileData?.sub ?? profileData?.user_id ?? null;
-      
+
       const handle = profileData?.username ?? profileData?.screen_name ?? profileData?.handle  ?? profileData?.name ?? null;
 
       const profileImage = profileData?.thread_profile_picture ?? profileData?.profile_image_url ?? profileData?.avatar_url ?? profileData?.profile_image ?? profileData?.picture?.data?.url ?? profileData?.picture?.url ?? profileData?.picture ?? null
 
       console.log(providerAccountId, handle, "providerAccountId")
-     
+
       return {
         providerAccountId,
         handle,
@@ -152,7 +149,6 @@ function createProvider(type:ChannelTypeEnum,opts: { pkce?: boolean} = {}): OAut
     },
    }
 }
-
 
 const PROVIDERS: Record<ChannelTypeEnum, any> = {
     [ChannelTypeEnum.TWITTER]: createProvider(ChannelTypeEnum.TWITTER,{ pkce: true }),

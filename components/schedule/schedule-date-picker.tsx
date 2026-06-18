@@ -27,7 +27,6 @@ interface ScheduleDatePickerProps {
   renderButton?: (isDatePassed: boolean, isTimeNotAvailable: boolean) => React.ReactNode
 }
 
-
 const generateTimeOptions = () => {
   const options: string[] = []
   const baseDate = startOfDay(new Date())
@@ -38,8 +37,6 @@ const generateTimeOptions = () => {
 }
 
 const timeOptions = generateTimeOptions()
-
-
 
 export function ScheduleDatePicker({
   date,
@@ -53,14 +50,13 @@ export function ScheduleDatePicker({
   const [open, setOpen] = React.useState(false)
   const today = React.useMemo(() => startOfDay(new Date()), [])
 
-
   const availableTimeOptions = React.useMemo(() => {
     if (!date || !isSameDay(date, new Date())) return timeOptions
     const now = new Date()
     return timeOptions.filter((slot) => {
       const [timeValue, meridiem] = slot.split(" ")
       const [rawHour, rawMinute] = timeValue.split(":").map(Number)
-      // hour - 
+
       const hour = meridiem === "PM" && rawHour !== 12 ? rawHour + 12 : meridiem === "AM" && rawHour === 12 ? 0 : rawHour
       const candidate = new Date(date)
       candidate.setHours(hour, rawMinute, 0, 0)
@@ -116,19 +112,11 @@ export function ScheduleDatePicker({
                 caption_label: "text-base font-semibold",
                 nav: "absolute right-2 top-0 flex items-center gap-1",
                 month: "space-y-4 w-full",
-                // table: "w-full border-collapse space-y-1",
-                // head_row: "flex w-full justify-between",
-                // head_cell: "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
-                // row: "flex w-full mt-2 justify-between",
-                // cell: "text-center text-sm p-0 relative focus-within:relative focus-within:z-20",
+
                 day: cn(
                   "h-9 w-9 p-0 font-normal aria-selected:opacity-100 rounded-lg hover:bg-muted transition-colors"
                 ),
-                // day_selected: "bg-primary! text-primary-foreground! hover:bg-primary! hover:text-primary-foreground! rounded-lg",
-                // day_today: "bg-muted text-foreground",
-                // day_outside: "text-muted-foreground opacity-50",
-                // day_disabled: "text-muted-foreground opacity-50",
-                // day_hidden: "invisible",
+
               }}
             />
 

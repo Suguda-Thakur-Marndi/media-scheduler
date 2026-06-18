@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Auth routes
+
       {
         source: "/sign-in",
         destination: "/routes/sign-in",
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         destination: "/routes/sign-up",
         permanent: false,
       },
-      // Dashboard routes
+
       {
         source: "/schedule",
         destination: "/routes/dashboard/schedule",

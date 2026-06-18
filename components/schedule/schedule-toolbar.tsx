@@ -52,7 +52,7 @@ const ScheduleToolbar = ({
 
   return (
     <div className="flex items-center gap-2">
-      {/* Status Filter */}
+      { }
       {viewType === "calendar" && (
 
         <Popover>
@@ -88,7 +88,7 @@ const ScheduleToolbar = ({
         </Popover>
       )}
 
-      {/* Channels Filter */}
+      { }
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="ghost" size="lg" className="h-8 gap-1">

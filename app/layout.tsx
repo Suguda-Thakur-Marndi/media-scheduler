@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={`${geistSans.className} h-full antialiased`}
-      
+
     >
       <body className="min-h-full flex flex-col">
         <ClerkProvider>

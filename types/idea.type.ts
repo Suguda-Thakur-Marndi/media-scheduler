@@ -1,6 +1,5 @@
 import { ImageObject } from "./post.type"
 
-
 export type IdeaType = {
     id?: string
     title: string

@@ -4,13 +4,11 @@ import { ImageObject } from "@/types/post.type";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
-
 type PostType = {
   channelTypeId: string
   content: string
   images?: ImageObject[]
 }
-
 
 export async function GET(request: NextRequest) {
     try {
@@ -35,16 +33,12 @@ export async function GET(request: NextRequest) {
 
         if (status) postQuery = postQuery.eq("status", status)
         if (channelIds.length > 0) postQuery = postQuery.in("user_channel_id", channelIds)
-        
+
         const {data:posts, error} = await postQuery;
         if(error) throw error;
 
-        //console.log("posts:", JSON.stringify(posts, null, 2))
-
-
         if(!groupByDate) return NextResponse.json({ posts: posts ?? []})
 
-        // {date: {label:"", posts:[]}}
         const groupMap = new Map<string,{label:string; posts: typeof posts}>();
 
         (posts ?? []).forEach((post) => {
@@ -52,7 +46,7 @@ export async function GET(request: NextRequest) {
 
             const key = [
                 date.getFullYear(),
-              
+
                 String(date.getMonth() + 1).padStart(2, "0"),
                 String(date.getDate()).padStart(2, "0")
             ].join("-");
@@ -69,15 +63,14 @@ export async function GET(request: NextRequest) {
             key,
             ...value
         }));
-        
+
         return NextResponse.json({ groupPosts })
-        
+
     } catch (error) {
         console.error("Error getting posts:", error)
         return NextResponse.json({ error: "Internal server error" }, { status: 500 })
     }
 }
-
 
 export async function POST(request: NextRequest) {
     try {
@@ -117,14 +110,14 @@ export async function POST(request: NextRequest) {
                 return NextResponse.json({ error: "You have reached your post limit, upgrade" }, { status: 403 })
             }
         }
-        
+
         const invalidPost = normalizedPosts.find((post) => !post.content);
         if (invalidPost) {
             return NextResponse.json({ error: "Post content is required" }, { status: 400 })
         }
 
         const channelTypeIds = [...new Set(normalizedPosts.map((post) => post.channelTypeId))];
-        
+
         const {data: userChannels, error: userChannelsError} = await insforge.database
             .from("user_channels")
             .select("id, channel_type_id")
@@ -140,7 +133,7 @@ export async function POST(request: NextRequest) {
             if(!userChannels || userChannels.length === 0) {
                 return NextResponse.json({ error: "No active channels found" }, { status: 404 })
             }
-            
+
             const connectedChannels = new Map(
                 userChannels.map((user_channel) => [
                     user_channel.channel_type_id,
@@ -170,8 +163,6 @@ export async function POST(request: NextRequest) {
                 scheduled_at: scheduledAt,
                 status: postStatus
             }))
-
-            // console.log(payload,"payload")
 
             const {data, error} = await insforge.database
             .from("scheduled_posts")
@@ -207,12 +198,11 @@ async function checkCreatePostLimit(
   return (count ?? 0) < 4;
 }
 
-
 function formatDayLabel(date:Date){
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    
+
     if(date.toDateString() === today.toDateString()) {
         return "Today";
     }

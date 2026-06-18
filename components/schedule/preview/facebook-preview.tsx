@@ -25,7 +25,7 @@ export function FacebookPreview({ text, images, profileImage, handle }: Facebook
             </Avatar>
             <div>
               <h4 className="text-[15px] font-semibold leading-none">{handle || "Lemon"}</h4>
-              <span className="flex items-center gap-1 mt-1 
+              <span className="flex items-center gap-1 mt-1
               text-muted-foreground text-xs">
                 Just Now ·
                 <svg viewBox="0 0 12 12" fill="none"
@@ -60,7 +60,7 @@ export function FacebookPreview({ text, images, profileImage, handle }: Facebook
           )}
         </div>
 
-        {/* Images display - Horizontal Scroll */}
+        { }
         {images && images.length > 0 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 mb-4">
             {images.map((image, index) => (
@@ -75,7 +75,7 @@ export function FacebookPreview({ text, images, profileImage, handle }: Facebook
           </div>
         )}
 
-        <div className="flex items-center justify-between pt-3 
+        <div className="flex items-center justify-between pt-3
         border-t text-muted-foreground">
           <div className="flex items-center gap-2 flex-1 justify-center">
             <ThumbsUp className="size-4" />

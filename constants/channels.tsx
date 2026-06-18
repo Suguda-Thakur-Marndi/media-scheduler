@@ -33,12 +33,10 @@ export const CHANNEL_TYPE_URLS: Record<ChannelTypeEnum, string> = {
   [ChannelTypeEnum.TIKTOK]: "https://tiktok.com",
 }
 
-
 export function getChannelUrl(type: ChannelTypeEnum | undefined) {
   if (!type) return ""
   return CHANNEL_TYPE_URLS[type]
 }
-
 
 export function getChannelIcon(type: ChannelTypeEnum | undefined) {
   if (!type) return null

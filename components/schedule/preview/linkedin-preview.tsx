@@ -25,7 +25,7 @@ export function LinkedinPreview({ text, images, profileImage, handle }: Linkedin
             </Avatar>
             <div className="flex flex-col">
               <h4 className="text-[14px] font-semibold leading-tight">{handle || "Lemon"}</h4>
-             <span className="flex items-center gap-1 mt-1 
+             <span className="flex items-center gap-1 mt-1
               text-muted-foreground text-xs">
                 1h ·
                 <svg viewBox="0 0 12 12" fill="none"
@@ -51,7 +51,7 @@ export function LinkedinPreview({ text, images, profileImage, handle }: Linkedin
               <span className="text-left block float-left w-full">
                 {text.slice(0, CHAR_LIMIT)}...
               </span>
-              <button 
+              <button
                 onClick={() => setIsExpanded(true)}
                 className="text-muted-foreground hover:text-primary text-[14px] font-medium"
               >
@@ -63,7 +63,7 @@ export function LinkedinPreview({ text, images, profileImage, handle }: Linkedin
           )}
         </div>
 
-        {/* Image Display - Horizontal Scroll */}
+        { }
         {images && images.length > 0 && (
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {images.map((image, index) => (
@@ -78,7 +78,7 @@ export function LinkedinPreview({ text, images, profileImage, handle }: Linkedin
           </div>
         )}
 
-        <div className="flex items-center justify-between pt-2 
+        <div className="flex items-center justify-between pt-2
         border-t">
           <div className="flex flex-col items-center gap-1 flex-1 ">
             <ThumbsUp className="size-4 -scale-x-100" />

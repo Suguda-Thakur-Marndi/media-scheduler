@@ -26,7 +26,7 @@ export function TwitterPreview({ text, images,profileImage,handle }: TwitterPrev
             <p className="mt-1 text-sm whitespace-pre-wrap break-words">
               {text || <span className="text-muted-foreground italic">Nothing yet…</span>}
             </p>
-            {/* Images display */}
+            { }
             {images && images.length > 0 && (
               <div className={`mt-3 grid gap-1 ${images.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
                 {images.slice(0, 4).map((image, index) => (
@@ -37,7 +37,7 @@ export function TwitterPreview({ text, images,profileImage,handle }: TwitterPrev
                       className="rounded-lg w-full h-[100px] object-cover"
                     />
                     {index === 3 && images.length > 4 && (
-                      <div className="absolute inset-0 bg-black/60 
+                      <div className="absolute inset-0 bg-black/60
                       rounded-lg flex items-center justify-center">
                         <span className="text-white text-2xl font-semibold">+{images.length - 4}</span>
                       </div>

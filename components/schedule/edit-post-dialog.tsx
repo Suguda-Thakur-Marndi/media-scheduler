@@ -58,7 +58,6 @@ export function EditPostDialog({
     post
 }: EditPostDialogProps) {
 
-
     const queryClient = useQueryClient();
 
     const updatePostMutation = useMutation({
@@ -100,14 +99,13 @@ export function EditPostDialog({
     const [time, setTime] = React.useState<string>("")
     const [selectedRightTab, setSeletedRightTab] = React.useState<ActionTabType | null>(null)
 
-    // Sync state when post changes
         React.useEffect(() => {
             if (post) {
                 setContent(post.content)
                 setImages(post.images ?? [])
                 const date = new Date(post.scheduledDate)
                 setDate(date)
-                // Extract time from scheduledDate
+
                 const hours = date.getHours()
                 const minutes = date.getMinutes()
                 const ampm = hours >= 12 ? "PM" : "AM"
@@ -176,14 +174,14 @@ export function EditPostDialog({
                     </DialogHeader>
                     <DialogDescription />
 
-                    {/* ── Main panel ── */}
+                    { }
                     <div className="w-full flex flex-1 h-full min-h-[550px] max-h-[570px] ">
 
-                        {/* Left panel */}
+                        { }
                         <div className="flex flex-1 flex-col min-w-0 w-[300px] pb-5">
 
-                            <section className="channel--composer relative 
-                    flex flex-col px-8 mt-5 min-h-[300px] 
+                            <section className="channel--composer relative
+                    flex flex-col px-8 mt-5 min-h-[300px]
                     h-auto">
                                 <div className="bg-background rounded-2xl border shadow-sm overflow-hidden min-h-[400px] flex flex-col p-4">
                                     <div className="flex-1 relative">
@@ -226,9 +224,9 @@ export function EditPostDialog({
                             </section>
                         </div>
 
-                        {/* Right Side Panel */}
+                        { }
                         {selectedRightTab && (
-                            <aside className="w-[350px] shrink-0 border-l border-border 
+                            <aside className="w-[350px] shrink-0 border-l border-border
                                   bg-muted/30 h-full flex flex-col">
                                 <div className="py-4 flex-1 h-full flex flex-col">
                                     {selectedRightTab === "ai" && (

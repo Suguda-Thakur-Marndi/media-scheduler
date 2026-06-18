@@ -23,9 +23,9 @@ export async function GET(request: NextRequest) {
         }
 
         const userChannelMap = new Map(
-            userChannelsRes.data.map(channel => 
+            userChannelsRes.data.map(channel =>
                 [
-                    channel.channel_type_id, 
+                    channel.channel_type_id,
                     channel
                 ]
             )
@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
             totalChannels,
             connectedCount
         })
-        
+
     } catch (error) {
         console.error('Error fetching channels:', error)
         return new NextResponse('Internal Server Error', { status: 500 })

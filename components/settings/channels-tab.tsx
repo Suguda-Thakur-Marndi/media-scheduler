@@ -168,11 +168,6 @@ function ChannelTabContent() {
     )
 }
 
-
-
-
-
-
 const ChannelsTab = () => {
     return (
         <Suspense fallback={<div className="text-sm text-muted-foreground">Loading channels...</div>}>

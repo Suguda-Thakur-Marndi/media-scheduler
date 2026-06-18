@@ -5,7 +5,6 @@ import { decrypt, encrypt } from "@/lib/encryption";
 import { refreshOauthToken } from "@/lib/social-oauth";
 import { ChannelTypeEnum } from "@/constants/channels";
 
-
 type DuePost = {
     id:string
 }
@@ -85,7 +84,7 @@ export const publishScheduledPost = inngest.createFunction(
             logger.error(error)
             throw error
         }
-        
+
         return data as PostType;
        })
 
@@ -99,12 +98,11 @@ export const publishScheduledPost = inngest.createFunction(
 
        const channelType = userChannel.channel_types
        if(!channelType) return {skipped: true, reason: "channel_type_not_found"}
-       
 
        const providerType = post.user_channels?.channel_types?.type;
        const accessToken = decrypt(post.user_channels?.access_token)
        const refreshToken = decrypt(post.user_channels?.refresh_token);
-       const tokenExpiresAt = post.user_channels?.token_expires_at ? 
+       const tokenExpiresAt = post.user_channels?.token_expires_at ?
             new Date(post.user_channels.token_expires_at).getTime() : null;
         const callbackUrl = `${APP_URL}/api/channel/callback`;
         const shouldRefreshBeforePublish = Boolean(refreshToken) &&
@@ -125,7 +123,7 @@ export const publishScheduledPost = inngest.createFunction(
                     refreshToken,
                     callbackUrl
                 )
-                await saveRefreshedToken(post.user_channels?.id, 
+                await saveRefreshedToken(post.user_channels?.id,
                     data.accessToken,
                     data.refreshToken ?? refreshToken,
                     data.expiresAt
@@ -134,7 +132,6 @@ export const publishScheduledPost = inngest.createFunction(
             })
             currentAccessToken = result.accessToken;
         }
-    
 
          let publishedUrl: string | null = null
 
@@ -157,8 +154,8 @@ export const publishScheduledPost = inngest.createFunction(
                         images: post.images,
                         logger
                     });
-                }  
-                
+                }
+
                 throw new Error(`Unsupported provider type: ${providerType}`)
             })
 
@@ -176,8 +173,6 @@ export const publishScheduledPost = inngest.createFunction(
     }
 )
 
-
-
 async function publishToTwitter({
     accessToken,
     content,
@@ -191,7 +186,7 @@ async function publishToTwitter({
     images?: ImageObject[]
     logger: any;
 }){
-    const mediaIds = images?.length ? 
+    const mediaIds = images?.length ?
     await uploadImagesToTwitter({
         accessToken,
         images,
@@ -206,10 +201,10 @@ async function publishToTwitter({
         },
         body: JSON.stringify({
             text: content,
-             ...(mediaIds.length > 0 ? { 
-                media: { 
-                    media_ids: mediaIds 
-                } 
+             ...(mediaIds.length > 0 ? {
+                media: {
+                    media_ids: mediaIds
+                }
             } : {})
         })
     })
@@ -228,10 +223,9 @@ async function publishToTwitter({
     const postId = data?.data?.id;
 
     if(!postId) throw new Error("Failed to get post ID from Twitter response")
-    
-    return handle ? `https://x.com/${handle}/status/${postId}` : null;   
-}
 
+    return handle ? `https://x.com/${handle}/status/${postId}` : null;
+}
 
 async function uploadImagesToTwitter({
     accessToken,
@@ -253,9 +247,9 @@ async function uploadImagesToTwitter({
 
     const pathname = new URL(image.url).pathname.toLowerCase();
 
-    const mediaType = 
-        contentType && 
-        contentType != "binary/octet-stream" && 
+    const mediaType =
+        contentType &&
+        contentType != "binary/octet-stream" &&
         contentType != "application/octet-stream" ? contentType :
         pathname.endsWith(".png") ? "image/png" :
         pathname.endsWith(".webp") ? "image/webp" :
@@ -275,7 +269,6 @@ async function uploadImagesToTwitter({
             body: formData
         })
 
-        
         const response = await uploadRes.text();
         logger.info("Twitter media upload response", { response });
         let data:any = null;
@@ -285,19 +278,17 @@ async function uploadImagesToTwitter({
             logger.error("Failed to parse Twitter media upload response", { response });
             data = null
         }
-        
+
         if(!uploadRes.ok) {
             throw new Error(`Failed to upload media to Twitter: ${response}`)
         }
-       
+
         const mediaId = data?.data?.id || data?.data?.media_key
        if(!mediaId) throw new Error("Failed to get media ID from Twitter response")
        mediaIds.push(mediaId)
    }
    return mediaIds
 }
-
-
 
 async function publishToLinkedIn({
   accessToken,
@@ -426,7 +417,6 @@ async function uploadLinkedInImage({
   return imageUrn as string
 }
 
-
 async function saveRefreshedToken(
     userChannelId: string | undefined,
     accessToken: string,
@@ -445,7 +435,7 @@ async function saveRefreshedToken(
             token_expires_at: expiresAt ?? null
         })
         .eq("id", userChannelId);
-    
+
     if(error) throw error
 }
 
@@ -471,17 +461,17 @@ async function markPostFailed(postId:string, errorMessage:string){
             error_message: errorMessage
         })
         .eq("id", postId);
-    
+
     if(error) throw error
 }
 
 function formatLinkedInText(text: string): string {
   return text
-    // normalize smart quotes to straight quotes
+
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
     .replace(/(\d+\.)\s{2}/g, '\n\n$1 ')
-    // trim
+
     .trim()
     .slice(0, 3000)
 }

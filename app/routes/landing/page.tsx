@@ -17,12 +17,11 @@ const navItems = [
 ];
 
 const platformBadges = [
-  // Left column — stacked vertically, stays in left ~15% of the container
+
   { type: ChannelTypeEnum.TWITTER, color: "#000000", className: "left-[2%]  top-[8%]" },
   { type: ChannelTypeEnum.LINKEDIN, color: "#2867b2", className: "left-[6%]  top-[32%]" },
   { type: ChannelTypeEnum.YOUTUBE, color: "#FF0000", className: "left-[2%]  top-[56%]" },
 
-  // Right column — stacked vertically, stays in right ~15% of the container  
   { type: ChannelTypeEnum.BLUESKY, color: "#1285fe", className: "right-[2%] top-[8%]" },
   { type: ChannelTypeEnum.INSTAGRAM, color: "#E4405F", className: "right-[6%] top-[32%]" },
   { type: ChannelTypeEnum.THREADS, color: "#000000", className: "right-[2%] top-[56%]" },
@@ -113,7 +112,7 @@ export default function LandingPage() {
 
         <div className="relative mx-auto flex min-h-[720px] max-w-7xl flex-col px-6 pb-16 pt-16">
           <div className="absolute hidden inset-0 md:block pointer-events-none">
-            {/* Fade badges toward center */}
+            { }
             <div className="absolute inset-y-0 left-0 w-[22%] bg-gradient-to-r from-transparent to-background/0 z-10" />
             <div className="absolute inset-y-0 right-0 w-[22%] bg-gradient-to-l from-transparent to-background/0 z-10" />
 
@@ -122,7 +121,7 @@ export default function LandingPage() {
               return (
                 <div
                   key={platform.type}
-                  className={`absolute ${platform.className} rounded-2xl border border-border/60 bg-card p-4 
+                  className={`absolute ${platform.className} rounded-2xl border border-border/60 bg-card p-4
         shadow-[0_10px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.24)]
         opacity-70 hover:opacity-100 transition-opacity`}
                 >

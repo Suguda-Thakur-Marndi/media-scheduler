@@ -40,30 +40,6 @@ const ListView = ({ setCreatePostModalOpen }: {
   const [selectedPostForEdit, setSelectedPostForEdit] = useState<PostType | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
-    // const { data, isFetching:isPending } = useQuery({
-  //   queryKey: ["posts", activeTab, channelIds],
-  //   queryFn: async () => {
-  //     const params = new URLSearchParams()
-  //     params.append("group_by_date", "true")
-  //     if (activeTab) params.append("status", activeTab)
-  //     if (channelIds.length > 0) params.append("channelIds", channelIds.join(","))
-  //     const res = await fetch(`/api/post?${params.toString()}`);
-  //     if (!res.ok) throw new Error("Failed to fetch posts");
-  //     return res.json();
-  //   },
-  // })
-
-  //  const { data:totalPosts } = useQuery({
-  //   queryKey: ["posts", "totals", channelIds],
-  //   queryFn: async () => {
-  //     const params = new URLSearchParams()
-  //     if (channelIds.length > 0) params.append("channelIds", channelIds.join(","))
-  //     const res = await fetch(`/api/post/totals?${params.toString()}`);
-  //     if (!res.ok) throw new Error("Failed to fetch posts");
-  //     return res.json();
-  //   }
-  // })
-
   const [postsQuery, totalsQuery] = useQueries({
     queries: [
       {
@@ -95,8 +71,6 @@ const ListView = ({ setCreatePostModalOpen }: {
   const isPending = postsQuery.isFetching
   const totalPosts = totalsQuery.data
   const isTotalsFetching = totalsQuery.isFetching
-
-
 
   const publishPostMutation = useMutation({
     mutationFn: async (postId: string) => {
@@ -151,7 +125,6 @@ const ListView = ({ setCreatePostModalOpen }: {
       post.id
     )
   }
-
 
   return (
     <>
@@ -224,16 +197,13 @@ const ListView = ({ setCreatePostModalOpen }: {
                         const channel = post.user_channels?.channel_types;
                         const previewImage = post.images?.[0]?.url;
                         return (
-                          <div key={post.id} className="grid gap-2 
+                          <div key={post.id} className="grid gap-2
                         lg:grid-cols-[120px_minmax(0,1fr)]">
                             <div>
                               <h5>
                                 {format(scheduleDate, "h:mm a")}
                               </h5>
-                              {/* <div className="flex items-center gap-2 text-muted-foreground">
-                                <Pin className="size-4" />
-                                <span>{post.status === "draft" ? "Draft" : "Custom"}</span>
-                              </div> */}
+                              { }
                               <div className={cn(
                                 "flex items-center gap-2",
                                 isPast(scheduleDate) && (post.status === "queue" || post.status === "draft")

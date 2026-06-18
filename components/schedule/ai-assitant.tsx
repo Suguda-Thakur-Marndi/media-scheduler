@@ -20,7 +20,7 @@ const QUICK_ACTIONS = [
 interface AIAssistantProps {
   onGenerate?: (content:string) => void
   className?: string
-  content?: string 
+  content?: string
   channelId?: string
 }
 
@@ -51,7 +51,7 @@ export function AIAssistant({ className, content, channelId, onGenerate }: AIAss
       return res.json()
     },
     onSuccess: (data) => {
-      // setGeneratedContent(data.content)
+
       onGenerate?.(data.content)
       setPrompt("")
     },
@@ -97,7 +97,7 @@ export function AIAssistant({ className, content, channelId, onGenerate }: AIAss
             </p>
           </div>
       )}
-      
+
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2 ">
           <Wand2Icon className="h-4 w-4 text-purple-500" />
@@ -112,7 +112,7 @@ export function AIAssistant({ className, content, channelId, onGenerate }: AIAss
         How can I help with this post?
       </p>
 
-      {/* Textarea for custom prompt */}
+      { }
       <div className="flex flex-col gap-2">
         <Textarea
           value={prompt}
@@ -162,7 +162,7 @@ export function AIAssistant({ className, content, channelId, onGenerate }: AIAss
         </div>
       )}
 
-      {/* Footer */}
+      { }
       <p className="mt-auto pt-4 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1">
           Pro tips: Add context for better results

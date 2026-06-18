@@ -11,7 +11,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 import { Textarea } from "./ui/textarea"
 import { ImageObject } from "@/types/post.type"
 
-
 interface ContentTextareaProps {
   value: string
   onChange: (value: string) => void
@@ -106,40 +105,36 @@ const ContentTextarea = ({
 
   return (
        <div className={cn("flex flex-col h-full", className)}>
-    
-      {/* Editable area */}
+
+      { }
       <Textarea
         ref={textareaRef}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         disabled={disabled}
-        //minHeight={minHeight}
+
         className={cn(
            "flex-[0.2] bg-transparent ring-0! border-none! resize-none! pt-0! pl-0! pr-0!",
           "placeholder:text-muted-foreground/80 overflow-y-auto",
           disabled && "opacity-50 cursor-not-allowed",
           contentClass
-          // `w-full bg-transparent 
-          // text-base
-          // placeholder:text-muted-foreground/80 focus:outline-none`,
-          // //contentClass && contentClass,
-          // disabled && "opacity-50 cursor-not-allowed"
+
         )}
      style={{ minHeight: `${minHeight}px`, maxHeight: `${minHeight}px` }}
       />
 
       <div className="shrink-0 space-y-0 -mt-4">
-        {/* Image Upload Section */}
+        { }
         <div className="flex items-center gap-3">
-          {/* Add Image Button */}
+          { }
           <div
             onClick={() => !isUploading && !disabled && fileInputRef.current?.click()}
             className={cn(
               `shrink-0 size-24 border-2 border-dashed border-muted-foreground/25
-               rounded-lg flex flex-col items-center 
+               rounded-lg flex flex-col items-center
               justify-center cursor-pointer hover:border-muted-foreground/50
-               hover:bg-muted/50 
+               hover:bg-muted/50
               transition-colors mb-3 shadow-sm`,
               (isUploading || disabled) && "opacity-50 cursor-not-allowed",
               disabled && "grayscale"
@@ -163,7 +158,7 @@ const ContentTextarea = ({
             className="hidden"
           />
 
-          {/* Uploaded Images - Scrollable container */}
+          { }
           {images.length > 0 && (
             <div className="flex gap-3 w-full max-w-[460px] overflow-x-auto pb-2">
               {images.map((image, index) => (
@@ -188,7 +183,7 @@ const ContentTextarea = ({
           )}
         </div>
 
-        {/* Toolbar */}
+        { }
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
             <Popover open={emojiOpen} onOpenChange={setEmojiOpen}>

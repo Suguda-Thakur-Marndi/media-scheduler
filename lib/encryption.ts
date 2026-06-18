@@ -35,7 +35,7 @@ export function decrypt(encrypted: string | null | undefined){
     const decipher = createDecipheriv("aes-256-gcm", encryptionKey, Buffer.from(iv, "base64url"))
 
     decipher.setAuthTag(Buffer.from(tag, "base64url"))
-    
+
     const decrypted = Buffer.concat([
         decipher.update(Buffer.from(encryted, "base64url")),
         decipher.final()

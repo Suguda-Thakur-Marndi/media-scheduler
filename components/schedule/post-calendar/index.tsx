@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { Calendar, dateFnsLocalizer, Views } from "react-big-calendar"
+import { Calendar, dateFnsLocalizer, Views, type View } from "react-big-calendar"
 import { format, parse, startOfWeek, getDay, addHours, isBefore, startOfDay } from "date-fns"
 import { enUS } from "date-fns/locale"
 import { ChevronLeft, ChevronRight, Plus, } from "lucide-react"
@@ -23,7 +23,6 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales,
 })
-
 
 interface PostCalendarProps {
   posts: PostType[]
@@ -121,13 +120,10 @@ export function PostCalendar({
         max={new Date(2026, 0, 1, 22, 0)}
         onNavigate={onDateChange}
         view={view === "month" ? Views.MONTH : Views.WEEK}
-        onView={(v) => onViewChange(v === Views.MONTH ? "month" : "week")}
+        onView={(v: View) => onViewChange(v === Views.MONTH ? "month" : "week")}
         onSelectEvent={(event: any) => onPostClick(event)}
-        //onSelectSlot={({ start }) => onCreatePost(start)}
-      
-        // In week view, disable past time slots 
-        // and style them differently
-        slotPropGetter={(date) => {
+
+        slotPropGetter={(date: Date) => {
           const isPastSlot = isBefore(date, new Date())
           return isPastSlot
             ? {
@@ -139,7 +135,7 @@ export function PostCalendar({
             }
             : {}
         }}
-        // In month view, disable past dates and style them differently
+
         dayPropGetter={(date: Date) => {
           const isPastDate = isBefore(date, new Date())
           return {
@@ -149,8 +145,8 @@ export function PostCalendar({
         }}
         components={{
           toolbar: CustomToolbar,
-          // Customize event rendering to show channel icons and better styling
-          event: ({ event }) => {
+
+          event: ({ event }: { event: any }) => {
             const channel = event.user_channels?.channel_types
             const Icon = getChannelIcon(channel?.type || undefined)
             const color = channel?.color || "#000000"

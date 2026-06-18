@@ -8,7 +8,9 @@ import {
     Droppable,
     Draggable,
     DropResult,
+    type DraggableProvidedDraggableProps,
 } from "@hello-pangea/dnd"
+import React from "react"
 import { toast } from "sonner"
 import { Button } from "../ui/button"
 import { Skeleton } from "../ui/skeleton"
@@ -92,7 +94,6 @@ const IdeaKanban = () => {
             toast.error("Failed to delete idea")
         }
     })
-
 
     const handleDragEnd = (result: DropResult) => {
         const { source, destination } = result;
@@ -250,7 +251,7 @@ const IdeaKanban = () => {
                         </p>
                     </div>
                     <div className="flex items-center gap-3">
-                        {/* //GenerateIdea popover */}
+                        { }
                         <GenerateIdeasPopover onGenerated={handleGeneratedIdea} />
                         <Button variant="outline" className="gap-2"
                             onClick={() => handleAddIdea(columns[0]?.id ?? "")}
@@ -261,13 +262,12 @@ const IdeaKanban = () => {
                     </div>
                 </header>
 
-
                 <div className="h-[calc(100vh-120px)]">
                     <div className="kanban--board relative py-6 flex-1 h-full overflow-hidden">
                         {isPending ? (
                             <div className="flex gap-4 w-full h-full items-start">
                                 {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="shrink-0 w-[280px] flex flex-col h-full min-h-0 
+                                    <div key={i} className="shrink-0 w-[280px] flex flex-col h-full min-h-0
                 rounded-lg bg-[#f7f6f3] dark:bg-neutral-800/40 border p-3">
                                         <div className="flex items-center justify-between pb-3">
                                             <Skeleton className="h-5 w-24" />
@@ -291,7 +291,7 @@ const IdeaKanban = () => {
                                         {columns?.map((column) => (
                                             <div
                                                 key={column.id}
-                                                className="shrink-0 w-[280px] flex flex-col h-full min-h-0 
+                                                className="shrink-0 w-[280px] flex flex-col h-full min-h-0
 rounded-lg bg-[#f7f6f3] dark:bg-neutral-800/40 border p-3"
                                             >
                                                 <div className="flex items-center justify-between px-3 pt-3 pb-2">
@@ -311,7 +311,6 @@ rounded-lg bg-[#f7f6f3] dark:bg-neutral-800/40 border p-3"
                                                         <Plus className="w-4 h-4" />
                                                     </Button>
                                                 </div>
-
 
                                                 <Droppable droppableId={column.id}>
                                                     {(provided, snapshot) => (
@@ -341,6 +340,7 @@ p-2 px-3 transition-colors min-h-0`,
                                                     ref={provided.innerRef}
                                                     {...provided.draggableProps}
                                                     {...provided.dragHandleProps}
+                                                    style={provided.draggableProps.style as React.CSSProperties}
                                                     className={cn(
                                                         "group cursor-pointer! shadow-sm rounded-sm! active:cursor-grabbing transform transition-all",
                                                         snapshot.isDragging &&
@@ -356,7 +356,7 @@ p-2 px-3 transition-colors min-h-0`,
                                                                         key={index}
                                                                         src={image.url}
                                                                         alt={idea.title}
-                                                                        className="w-full h-12 rounded object-cover 
+                                                                        className="w-full h-12 rounded object-cover
                                     border"
                                                                     />
                                                                 ))}

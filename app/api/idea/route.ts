@@ -1,7 +1,6 @@
 import { getInsforgeServerClient } from "@/lib/insforge-server";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function GET() {
     try {
         const { insforge, userId } = await getInsforgeServerClient();

@@ -5,11 +5,11 @@ import { createPkcePair, getPkceCookieName } from "@/lib/social-oauth/pkce";
 import { createOAuthState } from "@/lib/social-oauth/state";
 import { NextRequest, NextResponse } from "next/server";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL
 
 export async function POST(request: NextRequest) {
     try {
-    
+
         const {insforge, userId} = await getInsforgeServerClient();
         if (!userId) return NextResponse.json({ error: 'User not found' }, { status: 401 });
 
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
            const callbackUrl = `${APP_URL}/api/channel/callback`
 
-           const pkce = channelType.type === ChannelTypeEnum.TWITTER ? 
+           const pkce = channelType.type === ChannelTypeEnum.TWITTER ?
             createPkcePair()
            : null
 
@@ -57,12 +57,12 @@ export async function POST(request: NextRequest) {
                 secure: true,
                 sameSite: 'lax',
                 path: '/',
-                maxAge: 60 * 10, // 10 minutes
+                maxAge: 60 * 10,
             })
            }
-            
+
            return response;
-        
+
     } catch (error) {
         console.error('Error connecting channel:', error);
         return NextResponse.json({ error: 'Failed to connect channel' }, { status: 500 });

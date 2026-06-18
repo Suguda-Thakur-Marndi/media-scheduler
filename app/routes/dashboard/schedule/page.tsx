@@ -31,7 +31,7 @@ const SchedulePageContent = () => {
             type="single"
             value={activeView}
             onValueChange={(value) => {
-              //reset the url status
+
               setStatus(null)
               setActiveView(value as ViewType)
 
@@ -64,15 +64,13 @@ const SchedulePageContent = () => {
         )}
       </div>
 
-      <CreatePostDialog 
+      <CreatePostDialog
         open={createPostModalOpen}
         onOpenChange={setCreatePostModalOpen}
       />
     </div>
   )
 }
-
-
 
 const SchedulePage = () => {
   return (

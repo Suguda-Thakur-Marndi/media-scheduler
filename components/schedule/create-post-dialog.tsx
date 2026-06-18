@@ -45,7 +45,6 @@ const rightTabs = [
     { id: "preview" as ActionTabType, label: "Preview", icon: ScanEye },
 ]
 
-
 const CreatePostDialog = ({ open, onOpenChange, selectedDate }: PropsType) => {
 
     const queryClient = useQueryClient();
@@ -86,7 +85,6 @@ const CreatePostDialog = ({ open, onOpenChange, selectedDate }: PropsType) => {
        }
     }, [selectedDate])
 
-   
     useEffect(() => {
         if (channels.length > 0 && Object.keys(channelContent).length === 0) {
             const initialContent: Record<string, ChannelContent> = {}
@@ -283,7 +281,6 @@ const CreatePostDialog = ({ open, onOpenChange, selectedDate }: PropsType) => {
         })
     }
 
-
     const handleOpenChange = (open: boolean) => {
         onOpenChange(open);
         setGlobalContent({ text: "", images: [] });
@@ -322,10 +319,9 @@ const CreatePostDialog = ({ open, onOpenChange, selectedDate }: PropsType) => {
                         </div>
                     </DialogHeader>
 
-
                     <div className="w-full flex flex-1 min-w-0 overflow-hidden h-[580px]">
 
-                        {/* Left — channel list */}
+                        { }
                         <div className="flex flex-1 flex-col min-w-0 w-[300px] pb-5">
                             <div className="channel--selector py-5  px-8">
                                 {channels?.length > 0 && !isPending && (
@@ -387,8 +383,8 @@ const CreatePostDialog = ({ open, onOpenChange, selectedDate }: PropsType) => {
                                 </div>
                             </div>
 
-                            <div className="channel--content relative 
-                                        flex flex-col px-8 min-h-[300px] 
+                            <div className="channel--content relative
+                                        flex flex-col px-8 min-h-[300px]
                                         h-full overflow-y-auto">
                                 {selectedChannels.length === 0 ? (
                                     <div className="border rounded-xl p-4">
@@ -430,7 +426,7 @@ const CreatePostDialog = ({ open, onOpenChange, selectedDate }: PropsType) => {
                                                     {!isExpanded && (
                                                         <AccordionTrigger
                                                             className="w-full px-3 cursor-pointer [&>svg]:hidden! hover:bg-muted
-hover:no-underline! justify-start gap-3 
+hover:no-underline! justify-start gap-3
 "
                                                         >
                                                             <span>
@@ -443,7 +439,7 @@ hover:no-underline! justify-start gap-3
                                                                 />
                                                             </span>
                                                             {content.text ? (
-                                                                <p className="text-sm text-muted-foreground/80 
+                                                                <p className="text-sm text-muted-foreground/80
 truncate flex-1 text-left max-w-[400px]">
                                                                     {content.text}
                                                                 </p>
@@ -530,8 +526,7 @@ dark:text-amber-400">
                             </div>
                         </div>
 
-
-                        {/* Right — channel preview */}
+                        { }
                         {selectedRightTab && (
                             <div className="w-[350px] flex flex-col shrink-0 border-l border-border
             bg-muted/30 h-full
@@ -539,8 +534,8 @@ dark:text-amber-400">
                                 <div className="py-4 flex-1 flex flex-col h-full">
                                     {selectedRightTab === "ai" && (
                                         <div className="px-6">
-                                            <AIAssistant 
-                            content={channelContent[activeAccordion]?.text || 
+                                            <AIAssistant
+                            content={channelContent[activeAccordion]?.text ||
                                 globalContent?.text || ""
                             }
                             channelId={activeAccordion}

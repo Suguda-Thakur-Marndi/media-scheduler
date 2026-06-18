@@ -1,7 +1,6 @@
 import { ChannelTypeEnum } from "@/constants/channels"
 import { createHmac, timingSafeEqual } from "crypto"
 
-
 const OAUTH_STATE_SECRET = process.env.CHANNEL_OAUTH_STATE_SECRET!
 if(!OAUTH_STATE_SECRET) {
     throw new Error('CHANNEL_OAUTH_STATE_SECRET is not defined')
@@ -40,7 +39,6 @@ export function verifyOAuthState(state: string): OAuthStatePayload {
         throw new Error('Invalid state signature');
     }
     const statePayload = JSON.parse(Buffer.from(encodedState, 'base64url').toString('utf-8'));
-
 
     if (!statePayload.exp || statePayload.exp < Date.now()) {
         throw new Error('OAuth state expired');

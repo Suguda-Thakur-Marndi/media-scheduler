@@ -24,12 +24,12 @@ export function BlueSkyPreview({ text, images, profileImage, handle }: BlueSkyPr
               <span className="text-[14px] text-muted-foreground truncate">@{handle || "lemon.bsky.social"}</span>
               <span className="text-[14px] text-muted-foreground">· 21h</span>
             </div>
-            
+
             <p className="mt-1 text-[15px] leading-normal whitespace-pre-wrap wrap-break-word">
               {text || <span className="text-muted-foreground italic">Nothing yet…</span>}
             </p>
 
-            {/* Images display */}
+            { }
             {images && images.length > 0 && (
               <div className={`mt-3 grid gap-1 overflow-hidden rounded-xl border border-border/50 ${
                 images.length === 1 ? 'grid-cols-1' : 'grid-cols-2'

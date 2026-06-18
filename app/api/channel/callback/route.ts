@@ -84,7 +84,6 @@ export async function GET(request: NextRequest) {
 
         console.log("callback", JSON.stringify(profile, null, 2))
 
-
         const payload = {
             user_id: state.userId,
             channel_type_id: state.channelTypeId,
@@ -125,7 +124,7 @@ export async function GET(request: NextRequest) {
             connected: "false",
             error: "oauth_callback_failed"
         });
-        
+
         const stateParams = new URL(request.url).searchParams.get('state');
         if (stateParams) {
             const pkceCookieName = getPkceCookieName(stateParams);

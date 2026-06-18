@@ -12,7 +12,6 @@ import ContentTextarea from "../content-textarea"
 import { AIAssistant } from "../schedule/ai-assitant"
 import { Textarea } from "../ui/textarea"
 
-
 type IdeaDialogProps = {
     open: boolean
     onOpenChange: (open: boolean) => void
@@ -47,7 +46,6 @@ const IdeaDialog = ({
         setShowAI(false)
     }, [idea, selectedColumnId])
 
-
     const handleSave = () => {
         onSave({
             id: idea?.id,
@@ -62,7 +60,6 @@ const IdeaDialog = ({
     const handleOpenChange = (open: boolean) => {
         onOpenChange(open)
     }
-
 
     return (
         <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -81,7 +78,7 @@ const IdeaDialog = ({
                             <div>
                                 <Select value={selectedColumn}
                                     onValueChange={setSelectedColumn}>
-                                    <SelectTrigger className="min-w-[100px] 
+                                    <SelectTrigger className="min-w-[100px]
             max-w-[135px] gap-1! mr-5 text-sm">
                                         <Shapes />
                                         <SelectValue placeholder="Select column" />
@@ -132,13 +129,12 @@ const IdeaDialog = ({
                         </div>
                     </div>
 
-
                     {showAI && (
                         <div className="w-[340px] shrink-0 border-l border-border
                         bg-muted/30
                         ">
                             <div className="p-4">
-                                <AIAssistant  
+                                <AIAssistant
                                   content={`${title}\n\n${description}`}
                                   onGenerate={(content:string) => {
                                     setDescription(content)
