@@ -8,16 +8,16 @@ export default function DashboardLayout({
 }) {
   return (
     <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset
-            className="bg-sidebar! border-none"
-            >
-            <div className="m-1 px-4 rounded-lg border border-border
-             dark:border-[#e0e1e11a] shadow-xs bg-background h-full
-            ">
-            <div className="py-2 px-3">{children}</div>
+      <div className="flex min-h-screen w-full bg-background dark:mesh-bg-dark mesh-bg selection:bg-primary/30">
+        <AppSidebar />
+        <SidebarInset className="bg-transparent border-none flex-1 flex flex-col h-screen overflow-hidden">
+          <div className="m-2 md:m-3 lg:m-4 flex-1 rounded-[1.5rem] border border-white/20 dark:border-white/10 shadow-2xl glass-card overflow-hidden relative flex flex-col">
+            <div className="h-full bg-background/60 dark:bg-background/40 backdrop-blur-3xl flex flex-col overflow-hidden">
+              {children}
             </div>
+          </div>
         </SidebarInset>
+      </div>
     </SidebarProvider>
   )
 }

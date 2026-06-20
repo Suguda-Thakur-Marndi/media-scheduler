@@ -136,3 +136,33 @@ button[data-slot="button"] {
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .glass {
+    @apply bg-white/40 dark:bg-black/40 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+  }
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 shadow-lg transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-sky-500;
+  }
+  
+  .mesh-bg {
+    background-color: var(--background);
+    background-image: 
+      radial-gradient(at 40% 20%, oklch(0.84 0.18 122 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, oklch(0.72 0.20 200 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, oklch(0.75 0.14 140 / 0.1) 0px, transparent 50%);
+  }
+
+  .mesh-bg-dark {
+    background-color: var(--background);
+    background-image: 
+      radial-gradient(at 40% 20%, oklch(0.82 0.17 122 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, oklch(0.72 0.11 250 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, oklch(0.76 0.14 140 / 0.1) 0px, transparent 50%);
+  }
+}

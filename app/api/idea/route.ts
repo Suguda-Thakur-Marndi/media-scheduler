@@ -25,8 +25,23 @@ export async function GET() {
     }
 
     const ideas = ideasRes.data ?? [];
-    const groups = (groupsRes.data ?? []).map((group) => ({
-        id:group.id,
+    let dbGroups = groupsRes.data ?? [];
+
+    if (dbGroups.length === 0) {
+        // Create a default group if none exists
+        const { data: newGroup, error: insertError } = await insforge.database
+            .from("idea_groups")
+            .insert([{ user_id: userId, name: "Ideas" }])
+            .select()
+            .single();
+            
+        if (!insertError && newGroup) {
+            dbGroups = [newGroup];
+        }
+    }
+
+    const groups = dbGroups.map((group) => ({
+        id: group.id,
         title: group.name,
         ideas:ideas
             .filter((idea) => idea.group_id === group.id)
@@ -63,13 +78,44 @@ export async function POST(request: NextRequest) {
             sortOrder
         } = await request.json();
 
-        if (!title || !groupId) {
-            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        if (!title) {
+            return NextResponse.json({ error: "Missing required fields: title is required" }, { status: 400 });
+        }
+
+        let targetGroupId = groupId;
+        if (!targetGroupId) {
+            const { data: existingGroup } = await insforge.database
+                .from("idea_groups")
+                .select("id")
+                .eq("user_id", userId)
+                .order("created_at", { ascending: true })
+                .limit(1)
+                .single();
+            
+            if (existingGroup) {
+                targetGroupId = existingGroup.id;
+            } else {
+                const { data: newGroup, error: groupCreateError } = await insforge.database
+                    .from("idea_groups")
+                    .insert([{ user_id: userId, name: "Ideas" }])
+                    .select("id")
+                    .single();
+                
+                if (groupCreateError) {
+                    return NextResponse.json({ error: `Failed to create default group: ${groupCreateError.message}` }, { status: 500 });
+                }
+
+                targetGroupId = newGroup?.id;
+            }
+
+            if (!targetGroupId) {
+                 return NextResponse.json({ error: "Missing required fields: no idea groups available" }, { status: 400 });
+            }
         }
 
         const payload = {
             user_id: userId,
-            group_id: groupId,
+            group_id: targetGroupId,
             title: title,
             description,
             images: images,
@@ -92,7 +138,7 @@ export async function POST(request: NextRequest) {
         } else {
             const result = await insforge.database
                 .from("ideas")
-                .insert(payload)
+                .insert([payload])
                 .select()
                 .single();
             data = result.data;

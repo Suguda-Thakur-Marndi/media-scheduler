@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
 
             const {data, error} = await insforge.database
             .from("scheduled_posts")
-            .insert(payload)
+            .insert([payload])
             .select()
 
             if(error) {

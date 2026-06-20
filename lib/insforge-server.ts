@@ -23,9 +23,12 @@ async function refreshAuthToken(client: InsForgeClient, retries = 3): Promise<vo
     } else {
       throw new Error('No token received from Clerk');
     }
-  } catch (err) {
-
-    console.error('Failed to refresh Clerk token for InsForge client', err);
+  } catch (err: any) {
+    if (err?.errors?.[0]?.code === 'resource_not_found') {
+      console.warn(`[InsForge Auth] Clerk JWT Template '${SERVER_TOKEN_TEMPLATE}' not found. Please create it in your Clerk Dashboard to enable backend requests.`);
+    } else {
+      console.error('Failed to refresh Clerk token for InsForge client', err);
+    }
     client.getHttpClient().setAuthToken(null);
   }
 }

@@ -66,7 +66,10 @@ const IdeaKanban = () => {
                     sortOrder: idea.sortOrder
                 })
             })
-            if (!response.ok) throw new Error("Failed to save idea");
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.error || "Failed to save idea");
+            }
             return response.json()
         },
         onSuccess: () => {
@@ -74,7 +77,7 @@ const IdeaKanban = () => {
         },
         onError: (error) => {
             console.error("Failed to save idea:", error)
-            toast.error("Faild to save idea")
+            toast.error(error instanceof Error ? error.message : "Failed to save idea")
         }
     })
 

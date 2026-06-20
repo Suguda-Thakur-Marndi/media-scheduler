@@ -80,21 +80,21 @@ const AppSidebar = () => {
 
   return (
     <>
-    <Sidebar collapsible="icon">
-      <SidebarHeader className={cn("p-4", isCollapsed && "p-2")}>
+    <Sidebar collapsible="icon" className="border-none bg-transparent backdrop-blur-md">
+      <SidebarHeader className={cn("p-4", isCollapsed && "p-2", "bg-transparent")}>
         <div className='flex items-center justify-between'>
-           <Logo hideName={isCollapsed} />
+           <Logo hideName={isCollapsed} className="scale-105 ml-1" />
            <SidebarTrigger className="hidden md:flex -mx-8 mb-0" />
         </div>
-        <Button className='mt-4 w-full'
+        <Button className='mt-6 w-full rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all'
          size={isCollapsed ? "icon": "lg"}
          onClick={() => setIsCreatePostOpen(true)}
         >
-            <Plus className="size-4" />
-           {!isCollapsed && <span>New Post</span>}
+            <Plus className="size-5" />
+           {!isCollapsed && <span className="font-bold">New Post</span>}
         </Button>
       </SidebarHeader>
-      <SidebarContent className={cn(!isCollapsed && "px-2")}>
+      <SidebarContent className={cn(!isCollapsed && "px-3", "bg-transparent")}>
         <SidebarGroup>
             <SidebarGroupContent>
                 <SidebarMenu>
@@ -102,11 +102,12 @@ const AppSidebar = () => {
                         <SidebarMenuItem key={item.name}>
                             <SidebarMenuButton asChild
                             isActive={pathname === item.href}
-                    tooltip={item.name}
+                            tooltip={item.name}
+                            className="rounded-xl data-[active=true]:bg-primary/10 data-[active=true]:text-primary hover:bg-white/10 transition-colors py-5"
                             >
                                 <Link href={item.href}>
-                                    <item.icon className="size-4" />
-                                    <span className='text-sm'>{item.name}</span>
+                                    <item.icon className="size-5 opacity-80" />
+                                    <span className='text-sm font-semibold'>{item.name}</span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -116,8 +117,8 @@ const AppSidebar = () => {
         </SidebarGroup>
 
          {connectedChannels.length > 0 && (
-         <SidebarGroup className={cn(isCollapsed && "px-1")}>
-          <SidebarGroupLabel className='text-sm'>Channels</SidebarGroupLabel>
+         <SidebarGroup className={cn(isCollapsed && "px-1", "mt-4")}>
+          <SidebarGroupLabel className='text-xs font-bold uppercase tracking-widest text-muted-foreground/70'>Channels</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
                {isPending ? (
@@ -157,9 +158,8 @@ const AppSidebar = () => {
          </SidebarGroup>
          )}
 
-        { }
-         <SidebarGroup className={cn(isCollapsed && "px-1")}>
-          <SidebarGroupLabel className='text-sm'>Connect Channels</SidebarGroupLabel>
+         <SidebarGroup className={cn(isCollapsed && "px-1", "mt-4")}>
+          <SidebarGroupLabel className='text-xs font-bold uppercase tracking-widest text-muted-foreground/70'>Connect Channels</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {isPending ? (
@@ -221,8 +221,8 @@ const AppSidebar = () => {
           </SidebarGroupContent>
          </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-         <div className="mb-3 text-xs text-muted-foreground">
+      <SidebarFooter className="bg-transparent p-4">
+         <div className="mb-4 text-xs font-semibold text-muted-foreground/70 uppercase tracking-widest">
           <span>
             {connectedCount}/{totalChannels} channels connected
           </span>

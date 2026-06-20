@@ -94,11 +94,11 @@ function ChannelTabContent() {
         disconnectMutation.mutate(userChannelId)
     }
     return (
-        <Card>
+        <Card className="glass-card border-white/10 shadow-xl bg-transparent mt-0">
             <CardHeader>
-                <CardTitle>Channels</CardTitle>
+                <CardTitle className="text-xl font-bold">Channels</CardTitle>
                 <CardDescription>
-                    Connect your social media accounts to start scheduling
+                    Connect your social media accounts to start scheduling.
                 </CardDescription>
             </CardHeader>
 
@@ -119,7 +119,7 @@ function ChannelTabContent() {
                             const icon = getChannelIcon(channel.type)
                             return (
                                 <div key={channel.id}
-                                    className='flex items-center justify-between rounded-xl border p-4'
+                                    className='flex items-center justify-between rounded-2xl bg-muted/20 border border-white/5 shadow-inner p-4 hover:-translate-y-0.5 hover:bg-muted/30 transition-all'
                                 >
                                     <div className='flex items-center gap-3'>
                                         <span className='relative'>
@@ -145,10 +145,11 @@ function ChannelTabContent() {
                                             </div>
                                         </span>
 
-                                        <span className='font-medium'>{channel.name}</span>
+                                        <span className='font-bold text-foreground/90'>{channel.name}</span>
                                     </div>
 
                                     <Button variant={channel.connected ? "destructive" : "default"} size="sm"
+                                        className={`rounded-xl font-bold shadow-md ${!channel.connected && "shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"}`}
                                         disabled={connectMutation.isPending || disconnectMutation.isPending}
                                         onClick={() => channel.connected ? handleDisconnect(channel.user_channel_id!) : handleConnect(channel.id!)}
                                     >

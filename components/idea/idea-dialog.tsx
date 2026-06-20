@@ -47,9 +47,15 @@ const IdeaDialog = ({
     }, [idea, selectedColumnId])
 
     const handleSave = () => {
+        let finalTitle = title.trim();
+        if (!finalTitle && description.trim()) {
+            finalTitle = description.trim().split('\n')[0].substring(0, 50);
+            if (description.length > 50) finalTitle += "...";
+        }
+
         onSave({
             id: idea?.id,
-            title: title,
+            title: finalTitle || "Untitled Idea",
             description,
             images,
             columnId: selectedColumn,
@@ -98,7 +104,7 @@ const IdeaDialog = ({
 
                             <Textarea
                                 value={title}
-                                placeholder="Give your idea a title"
+                                placeholder="Give your idea a title (optional)"
                                 onChange={(e) => setTitle(e.target.value)}
                                 rows={2}
                                 className="w-full min-w-0 border-0 px-0 text-xl! font-semibold
@@ -121,7 +127,7 @@ const IdeaDialog = ({
                         <div className="shrink-0 flex items-center justify-end gap-2 border-t border-border px-5 py-3">
                             <Button
                                 size="lg"
-                                disabled={isSaving || !title.trim()}
+                                disabled={isSaving || (!title.trim() && !description.trim())}
                                 onClick={handleSave}
                             >
                                 {isSaving && <Spinner />}

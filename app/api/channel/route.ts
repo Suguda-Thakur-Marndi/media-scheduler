@@ -19,6 +19,10 @@ export async function GET(request: NextRequest) {
         ]);
 
         if (typesRes.error || userChannelsRes.error) {
+            console.error('Database query error:', {
+                typesError: typesRes.error,
+                userChannelsError: userChannelsRes.error
+            });
             return new NextResponse('Internal Server Error', { status: 500 })
         }
 
