@@ -14,7 +14,6 @@ let cachedClient: InsForgeClient | null = null;
 let cachedUserId: string | null = null;
 let refreshInterval: NodeJS.Timeout | null = null;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function refreshAuthToken(client: InsForgeClient, retries = 3): Promise<void> {
   try {
     const session = await auth();
@@ -24,7 +23,7 @@ async function refreshAuthToken(client: InsForgeClient, retries = 3): Promise<vo
     } else {
       throw new Error('No token received from Clerk');
     }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   } catch (err: any) {
     if (err?.errors?.[0]?.code === 'resource_not_found') {
       console.warn(`[InsForge Auth] Clerk JWT Template '${SERVER_TOKEN_TEMPLATE}' not found. Please create it in your Clerk Dashboard to enable backend requests.`);
