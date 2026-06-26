@@ -70,7 +70,7 @@ export async function getInsforgeServerClient(): Promise<{ insforge: InsForgeCli
     await refreshAuthToken(cachedClient);
   }
 
-  return { insforge: cachedClient, userId };
+  return { insforge: cachedClient, userId };;
 }
 
 export function getInsforgeAdminClient(): InsForgeClient {
